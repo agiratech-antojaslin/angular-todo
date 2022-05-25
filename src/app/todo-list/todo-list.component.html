@@ -1,0 +1,7 @@
+<div class="todo-list row">
+    <app-todo-add (newTodoAdded) = "addTodo($event)" class="col-sm-12"></app-todo-add>
+</div>
+<div class="todo-list row">
+    <app-todo-list-item *ngFor="let todo of todos_arr" [todo] = "todo" (editTodoKey) = "editTodo($event)" class="col-sm-12"></app-todo-list-item>
+</div>
+<app-todo-edit [editTodoItem] = "editTodoObj" (editedTodoObj) = "editedTodo($event)"></app-todo-edit>

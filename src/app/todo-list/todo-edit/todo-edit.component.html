@@ -1,0 +1,19 @@
+<ng-template #modalData let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit Todo</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="todo_edit">
+            <div class="todo_edit--input">
+                <input *ngIf="editTodoItem != undefined" value="{{ editTodoItem.name }}" type="text" class="form-control" #inputEditTodo >
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-cancel" (click)="modal.close('Save click')">Cancel</button>
+      <button type="button" class="btn btn-save" (click) = "todoEdited()">Save</button>
+    </div>
+</ng-template>

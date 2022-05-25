@@ -1,14 +1,28 @@
-<div>
+<div *ngIf="!todo.isCompleted">
     <div class="todo_list_item">
         <div class="form-check todo_list_item--check">
-            <label class="container-check">{{ todo.name }}
+            <label class="container-check" (click) = "onCompleteClick(todo.key)">{{ todo.name }}
                 <input type="checkbox">
                 <span class="checkmark"></span>
             </label>
         </div>
         <div class="todo_list_item--options">
             <button class="btn btn-light mr-2" type="button" (click) = "onEditClick(todo.key)"><i class="fa fa-pencil"></i></button>
-            <button class="btn btn-light"><i class="fa fa-trash"></i></button>
+            <button class="btn btn-light" type="button" (click) = "onDeleteClick(todo.key)"><i class="fa fa-trash"></i></button>
+        </div>
+    </div>
+</div>
+<div *ngIf="todo.isCompleted">
+    <div class="todo_list_item">
+        <div class="form-check todo_list_item--check">
+            <label class="container-check">{{ todo.name }}
+                <!-- <input type="checkbox" disabled>
+                <span class="checkmark"></span> -->
+            </label>
+        </div>
+        <div class="todo_list_item--options">
+            
+            <button class="btn btn-light" type="button" (click) = "onDeleteClick(todo.key)"><i class="fa fa-trash"></i></button>
         </div>
     </div>
 </div>

@@ -9,6 +9,8 @@ import { TodoListItemComponent } from './todo-list/todo-list-item/todo-list-item
 import { TodoAddComponent } from './todo-list/todo-add/todo-add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TodoEditComponent } from './todo-list/todo-edit/todo-edit.component';
+import { FormsModule } from '@angular/forms';
+import { TodoPopupComponent } from './todo-list/todo-popup/todo-popup.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import { TodoEditComponent } from './todo-list/todo-edit/todo-edit.component';
     TodoListComponent,
     TodoListItemComponent,
     TodoAddComponent,
-    TodoEditComponent
+    TodoEditComponent,
+    TodoPopupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

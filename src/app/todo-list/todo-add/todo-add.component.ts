@@ -19,7 +19,7 @@ export class TodoAddComponent implements OnInit {
   onTodoAdded() {
     const createdTodo = this.inputTodoRef.nativeElement.value;
     const createdTodoKey = Math.floor(1000 + Math.random() * 9000);
-    const newTodo = new Todo(createdTodoKey, createdTodo);
+    const newTodo = new Todo(createdTodoKey, createdTodo, false);
     this.newTodoAdded.emit(newTodo);
     this.inputTodoRef.nativeElement.value = "";
   }

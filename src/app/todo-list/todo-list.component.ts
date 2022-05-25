@@ -9,10 +9,12 @@ import { Todo } from '../modals/todo.modal';
 })
 export class TodoListComponent implements OnInit {
 
-  todos_arr = [new Todo(1234, 'Go for walking'), new Todo(1235,'Take some tea'), new Todo(1236,'Reading books')];
+  todos_arr = [new Todo(1234, 'Go for walking', false), new Todo(1235,'Take some tea', false), new Todo(1236,'Reading books', false)];
+  completed_todos_arr = [new Todo(1234, 'Have Breakfast', true)];
   showModal = false;
   closeModal!: string;
   editTodoObj!: Todo | undefined;
+  completeTodoObj!: Todo | undefined;
   @ViewChild("modalData") modalData!: ElementRef;
 
   constructor(private modalService: NgbModal) { }
@@ -51,7 +53,28 @@ export class TodoListComponent implements OnInit {
   }
 
   editedTodo(editedTodo: Todo) {
-    this.todos_arr.push(editedTodo);
+    this.todos_arr.map(function(todo) {
+      if(todo.key == editedTodo.key) {
+        todo.name = editedTodo.name;
+      }
+    });
+  }
+
+  deleteTodo(deleteTodo: number) {
+    this.todos_arr.forEach((todo,index)=>{
+      if(todo.key == deleteTodo) { this.todos_arr.splice(index,1) };
+    });
+  }
+
+  completeTodo(completeTodo: number) {
+    this.completeTodoObj = this.todos_arr.find(x => x.key === completeTodo);
+  }
+
+  completedTodo(completedTodo: Todo) {
+    this.todos_arr.forEach((todo,index)=>{
+      if(todo.key == completedTodo.key) { this.todos_arr.splice(index,1) };
+    });
+    this.completed_todos_arr.push(completedTodo);
   }
 
 }

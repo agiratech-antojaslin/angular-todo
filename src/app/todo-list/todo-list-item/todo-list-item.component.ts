@@ -12,6 +12,8 @@ export class TodoListItemComponent implements OnInit {
   @Input() todo!: Todo;
   closeModal!: string;
   @Output() editTodoKey = new EventEmitter<number>();
+  @Output() deleteTodoKey = new EventEmitter<number>();
+  @Output() completedTodoKey = new EventEmitter<number>();
 
   constructor(private modalService: NgbModal) { }
 
@@ -38,6 +40,14 @@ export class TodoListItemComponent implements OnInit {
 
   onEditClick(todoKey: number | undefined) {
     this.editTodoKey.emit(todoKey);
+  }
+
+  onDeleteClick(todoKey: number | undefined) {
+    this.deleteTodoKey.emit(todoKey);
+  }
+
+  onCompleteClick(todoKey: number | undefined) {
+    this.completedTodoKey.emit(todoKey);
   }
 
 }

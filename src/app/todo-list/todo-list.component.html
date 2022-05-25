@@ -1,7 +1,21 @@
 <div class="todo-list row">
     <app-todo-add (newTodoAdded) = "addTodo($event)" class="col-sm-12"></app-todo-add>
 </div>
+<div class="todo-list row" *ngIf="todos_arr.length > 0; else other_content">
+    <app-todo-list-item *ngFor="let todo of todos_arr" [todo] = "todo" (editTodoKey) = "editTodo($event)" (deleteTodoKey) = "deleteTodo($event)" (completedTodoKey) = "completeTodo($event)" class="col-sm-12 todo-list_incompleted"></app-todo-list-item>
+</div>
+<ng-template #other_content>
+    <div class="row">
+        <div class="col-sm-12 text-center my-3 text-theme">
+            <p><b>Todolist is empty!</b></p>
+        </div>
+    </div>
+</ng-template>
 <div class="todo-list row">
-    <app-todo-list-item *ngFor="let todo of todos_arr" [todo] = "todo" (editTodoKey) = "editTodo($event)" class="col-sm-12"></app-todo-list-item>
+    <div class="col-sm-12 text-center my-5">
+        <h3>Completed Todos</h3>
+    </div>
+    <app-todo-list-item *ngFor="let todo of completed_todos_arr" [todo] = "todo" (editTodoKey) = "editTodo($event)" (deleteTodoKey) = "deleteTodo($event)" (completedTodoKey) = "completeTodo($event)" class="col-sm-12 todo-list_completed"></app-todo-list-item>
 </div>
 <app-todo-edit [editTodoItem] = "editTodoObj" (editedTodoObj) = "editedTodo($event)"></app-todo-edit>
+<app-todo-popup [completeTodoItem] = "completeTodoObj" (completedTodoObj) = "completedTodo($event)"></app-todo-popup>

@@ -35,6 +35,9 @@ body {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+.todo-list_completed .container-check input{
+  display: none;
+}
 .container-check {
     display: block;
     position: relative;
@@ -73,6 +76,11 @@ body {
   /* On mouse-over, add a grey background color */
   .container-check:hover input ~ .checkmark {
     background-color: #ccc;
+  }
+
+  .todo-list_incompleted .container-check:hover {
+    text-decoration: line-through;
+    color: #ccc;
   }
   
   /* When the checkbox is checked, add a blue background */
@@ -121,4 +129,7 @@ body {
   }
   .modal-footer .btn-save {
     background-color: #45b8b2;
+  }
+  .text-theme {
+    color: #55d5c1;
   }

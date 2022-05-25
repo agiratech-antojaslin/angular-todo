@@ -1,36 +1,30 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { Todo } from 'src/app/modals/todo.modal';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Todo } from 'src/app/modals/todo.modal';
 
 @Component({
-  selector: 'app-todo-edit',
-  templateUrl: './todo-edit.component.html',
-  styleUrls: ['./todo-edit.component.css']
+  selector: 'app-todo-popup',
+  templateUrl: './todo-popup.component.html',
+  styleUrls: ['./todo-popup.component.css']
 })
-export class TodoEditComponent implements OnInit {
+export class TodoPopupComponent implements OnInit {
 
-  @Input() editTodoItem!: Todo | undefined;
   closeModal!: string;
-  @ViewChild("modalData", {static: false}) modalTemplate!: ElementRef;
-  @ViewChild("inputEditTodo") inputEdit!: ElementRef;
-  @Output() editedTodoObj = new EventEmitter<Todo>();
-  editTodoContent: string | undefined;
-   
-  constructor(private modalService: NgbModal) { 
-    
-  }
+  @Input() completeTodoItem!: Todo | undefined;
+  @ViewChild("todoPopup", {static: false}) todoPopupTemplate!: ElementRef;
+  @Output() completedTodoObj = new EventEmitter<Todo>();
+
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if( changes['editTodoItem'].currentValue ) {
-      this.triggerModal(this.modalTemplate);
-      this.editTodoContent = this.editTodoItem?.name;
+    if( changes['completeTodoItem'].currentValue ) {
+      this.triggerModal(this.todoPopupTemplate);
     };
   }
-  
+
   triggerModal(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((res) => {
       this.closeModal = `Closed with: ${res}`;
@@ -48,12 +42,11 @@ export class TodoEditComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
-
-  todoEdited() {
+  
+  onCompletedTodo() {
     this.modalService.dismissAll();
-    const editedTodoContent = this.editTodoContent!;
-    const editedTodo = new Todo(this.editTodoItem?.key, editedTodoContent, false);
-    this.editedTodoObj.emit(editedTodo);
+    this.completeTodoItem!.isCompleted = true;
+    this.completedTodoObj.emit(this.completeTodoItem);
   }
 
 }
